@@ -30,7 +30,6 @@ h2 {
 }
 
 .profileImg {
-	background: url(https://avatars2.githubusercontent.com/u/7596365?v=4&u=9f60a4b0169e88b55ade132c7933fcc44fabdfab) no-repeat center center;
 	max-width: 40%;
 	border-radius: 45%;
 	border: solid rgb(0, 0, 0);/*for older browsers*/
