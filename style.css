@@ -1,5 +1,7 @@
 html { 
   background: url(https://scontent-sjc2-1.cdninstagram.com/t51.2885-15/e35/13167189_1153311584713756_1138798117_n.jpg) no-repeat center center fixed; 
+  /*That ^^^ is my own photo, which I took near the Space Needle.
+  Those are my feet.*/
   -webkit-background-size: cover;/*for older browsers*/
   -moz-background-size: cover;/*for older Mozilla*/
   -o-background-size: cover;/*for older Opera*/
@@ -10,26 +12,27 @@ html {
 
 h1 {
 	color: black;
-	font-size: 50px;
+	font-size: 35pt;
 	font-weight: normal;
 	margin-bottom: 0;
 }
 
 h2 {
 	color: white;
-	font-size: 18px;
+	font-size: 18pt;
 	margin-top: 0;
 }
 
 .bio {
 	color: black;
-	font-size: 14px;
+	font-size: 10pt;
 
 }
 
-.profileimg {
-	height: 150px;
-	border-radius: 70px;
+.profileImg {
+	background: url(https://avatars2.githubusercontent.com/u/7596365?v=4&u=9f60a4b0169e88b55ade132c7933fcc44fabdfab) no-repeat center center;
+	max-width: 40%;
+	border-radius: 45%;
 	border: solid rgb(0, 0, 0);/*for older browsers*/
 	border: solid rgba(0, 0, 0, .5);
 	background-clip: padding-box;
@@ -37,7 +40,8 @@ h2 {
 }
 
 .about {
-	width: 400px;
+	max-width: 63%;
+	min-width: 350px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
