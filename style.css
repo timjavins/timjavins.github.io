@@ -1,0 +1,50 @@
+html { 
+  background: url(https://scontent-sjc2-1.cdninstagram.com/t51.2885-15/e35/13167189_1153311584713756_1138798117_n.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;/*for older browsers*/
+  -moz-background-size: cover;/*for older Mozilla*/
+  -o-background-size: cover;/*for older Opera*/
+  -ms-background-size: cover;/*for older MS browsers*/
+  background-size: cover;
+  font-family: 'Permanent Marker', sans-serif;/*use Google Font, or Sans Serif*/
+}
+
+h1 {
+	color: black;
+	font-size: 50px;
+	font-weight: normal;
+	margin-bottom: 0;
+}
+
+h2 {
+	color: white;
+	font-size: 18px;
+	margin-top: 0;
+}
+
+.bio {
+	color: black;
+	font-size: 14px;
+
+}
+
+.profileimg {
+	height: 150px;
+	border-radius: 70px;
+	border: solid rgb(0, 0, 0);/*for older browsers*/
+	border: solid rgba(0, 0, 0, .5);
+	background-clip: padding-box;
+	margin-top: 40px;
+}
+
+.about {
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+.horiBar {
+	height: 3px;
+	background-color: pink;
+	border: 0;
+}
