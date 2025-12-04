@@ -11,26 +11,48 @@ permissions:
 
 env:
   PAGES_SUBDIR: projects/Bullinger
-  BUILD_COMMAND: "" # Set to custom build command if needed, e.g. "npm run build"
+  BUILD_COMMAND: "" # Set to a build command if Bullinger needs one, e.g. "npm run build"
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout pages repo (this repo)
+      - name: Checkout pages repo (use default branch)
         uses: actions/checkout@v4
         with:
-          ref: main
+          persist-credentials: true
+          clean: true
+          fetch-depth: 1
+          # intentionally not setting `ref:` so the repository default branch is used
 
-      - name: Checkout Bullinger repository
+      - name: Diagnose repo after checkout
+        run: |
+          echo "Working dir: $(pwd)"
+          echo "Git status:"
+          git status --porcelain --untracked-files=no || true
+          echo "Local branches:"
+          git branch --show-current || true
+          echo "Remote refs (ls-remote):"
+          git ls-remote origin || true
+
+      - name: Checkout Bullinger repository (use its default branch)
         uses: actions/checkout@v4
         with:
           repository: timjavins/Bullinger
           path: bullinger
-          ref: main
-          # If Bullinger is private, create a personal access token with repo scope
-          # and add it to this repo's secrets as REPO_TOKEN, then uncomment the next line:
+          persist-credentials: false
+          clean: true
+          fetch-depth: 1
+          # If Bullinger is private, create a PAT with repo scope and add it as REPO_TOKEN, then set:
           # token: ${{ secrets.REPO_TOKEN }}
+
+      - name: Show Bullinger repo info (diagnose)
+        run: |
+          echo "Bullinger path: $(pwd)/bullinger"
+          ls -la bullinger | sed -n '1,200p' || true
+          if [ -d bullinger ]; then
+            (cd bullinger && git rev-parse --abbrev-ref HEAD || true)
+          fi
 
       - name: Setup Node (for builds using npm)
         uses: actions/setup-node@v4
