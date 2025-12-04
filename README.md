@@ -29,7 +29,7 @@ Visit the live site at: [https://timjavins.github.io](https://timjavins.github.i
 │       ├── Bullinger.html # Tribute page about E.W. Bullinger
 │       ├── style.css      # Styling for the tribute page
 │       └── README.md      # Project-specific documentation
-└── bullinger/             # Additional resources
+└── bullinger/             # Empty directory (reserved for future content)
 ```
 
 ## Technologies Used
@@ -84,9 +84,6 @@ Alternatively, you can use a local web server:
 ```bash
 # Using Python 3
 python -m http.server 8000
-
-# Using Python 2
-python -m SimpleHTTPServer 8000
 
 # Then visit http://localhost:8000
 ```
