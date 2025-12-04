@@ -1,0 +1,33 @@
+h1 span {
+   letter-spacing: -1px;  
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding: 10px;
+}
+
+.container {
+   max-width: 800px;
+   margin: 0 auto;
+}
+
+.panel-info {
+   border-color: #bce8f1;
+   background: #f5fafd;
+}
+
+.panel-heading h2 {
+   font-size: 2em;
+   color: #31708f;
+   margin-bottom: 0;
+}
+
+.panel-body h3 {
+   color: #245269;
+   margin-top: 20px;
+}
+
+.panel-body p {
+   font-size: 1.15em;
+   line-height: 1.7;
+   margin-bottom: 15px;
+}
