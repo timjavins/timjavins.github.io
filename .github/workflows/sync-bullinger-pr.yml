@@ -11,7 +11,7 @@ permissions:
 
 env:
   PAGES_SUBDIR: projects/Bullinger
-  BUILD_COMMAND: "" # Set to a build command if Bullinger needs one, e.g. "npm run build"
+  BUILD_COMMAND: "" # Set to custom build command if needed, e.g. "npm run build"
 
 jobs:
   sync:
@@ -23,7 +23,6 @@ jobs:
           persist-credentials: true
           clean: true
           fetch-depth: 1
-          # intentionally not setting `ref:` so the repository default branch is used
 
       - name: Diagnose repo after checkout
         run: |
@@ -43,23 +42,14 @@ jobs:
           persist-credentials: false
           clean: true
           fetch-depth: 1
-          # If Bullinger is private, create a PAT with repo scope and add it as REPO_TOKEN, then set:
-          # token: ${{ secrets.REPO_TOKEN }}
-
-      - name: Show Bullinger repo info (diagnose)
-        run: |
-          echo "Bullinger path: $(pwd)/bullinger"
-          ls -la bullinger | sed -n '1,200p' || true
-          if [ -d bullinger ]; then
-            (cd bullinger && git rev-parse --abbrev-ref HEAD || true)
-          fi
+          # If Bullinger is private, set token: ${{ secrets.REPO_TOKEN }} here
 
       - name: Setup Node (for builds using npm)
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: Build (if package.json exists) and copy into pages
+      - name: Build (if package.json exists) and copy into pages (exclude .git and .gitmodules)
         id: sync_files
         run: |
           set -e
@@ -80,23 +70,29 @@ jobs:
             fi
 
             if [ -d dist ]; then
-              rsync -a --delete dist/ ../${{ env.PAGES_SUBDIR }}/
+              rsync -a --delete --exclude='.git' --exclude='.gitmodules' dist/ ../${{ env.PAGES_SUBDIR }}/
             elif [ -d build ]; then
-              rsync -a --delete build/ ../${{ env.PAGES_SUBDIR }}/
+              rsync -a --delete --exclude='.git' --exclude='.gitmodules' build/ ../${{ env.PAGES_SUBDIR }}/
             elif [ -d _site ]; then
-              rsync -a --delete _site/ ../${{ env.PAGES_SUBDIR }}/
+              rsync -a --delete --exclude='.git' --exclude='.gitmodules' _site/ ../${{ env.PAGES_SUBDIR }}/
             else
-              echo "No recognized build output; copying source"
-              rsync -a --delete ./ ../${{ env.PAGES_SUBDIR }}/
+              echo "No recognized build output; copying source (excluding .git and .gitmodules)"
+              rsync -a --delete --exclude='.git' --exclude='.gitmodules' ./ ../${{ env.PAGES_SUBDIR }}/
             fi
           else
-            echo "No package.json — copying source"
-            rsync -a --delete ./ ../${{ env.PAGES_SUBDIR }}/
+            echo "No package.json — copying source (excluding .git and .gitmodules)"
+            rsync -a --delete --exclude='.git' --exclude='.gitmodules' ./ ../${{ env.PAGES_SUBDIR }}/
           fi
 
+          # Remove any accidentally-copied Git metadata in target
           rm -rf ../${{ env.PAGES_SUBDIR }}/.git || true
+          rm -f ../${{ env.PAGES_SUBDIR }}/.gitmodules || true
 
           cd ..
+
+          # Remove top-level .gitmodules in pages repo (if present) to avoid submodule init errors
+          git rm --ignore-unmatch .gitmodules || true
+
           if [ -n "$(git status --porcelain)" ]; then
             echo "changed=true" >> $GITHUB_OUTPUT
           else
