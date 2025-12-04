@@ -1,4 +1,5 @@
-name: Sync Bullinger into pages
+name: Sync Bullinger into pages (create PR)
+
 on:
   workflow_dispatch:
   repository_dispatch:
@@ -6,11 +7,12 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 env:
   PAGES_SUBDIR: projects/Bullinger
   BUILD_COMMAND: "" # Set to custom build command if needed, e.g. "npm run build"
-  
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -26,8 +28,8 @@ jobs:
           repository: timjavins/Bullinger
           path: bullinger
           ref: main
-          # If Bullinger is private, create a personal access token (repo scope) and save it as REPO_TOKEN in this repo's secrets,
-          # then uncomment the following line to use it:
+          # If Bullinger is private, create a personal access token with repo scope
+          # and add it to this repo's secrets as REPO_TOKEN, then uncomment the next line:
           # token: ${{ secrets.REPO_TOKEN }}
 
       - name: Setup Node (for builds using npm)
@@ -36,28 +38,25 @@ jobs:
           node-version: '18'
 
       - name: Build (if package.json exists) and copy into pages
+        id: sync_files
         run: |
           set -e
-          # Ensure target dir exists and is clean
           rm -rf ${{ env.PAGES_SUBDIR }} || true
           mkdir -p ${{ env.PAGES_SUBDIR }}
 
-          # Work inside checked-out Bullinger repo
           cd bullinger
 
           if [ -f package.json ]; then
-            echo "Detected package.json — running build (if available)"
+            echo "Detected package.json — attempting build"
             npm ci --silent || true
 
             if [ -n "${{ env.BUILD_COMMAND }}" ]; then
               echo "Running custom build command: ${{ env.BUILD_COMMAND }}"
               eval "${{ env.BUILD_COMMAND }}"
             else
-              # try common build command; ignore failure (fallback to copying source)
               npm run build --silent || true
             fi
 
-            # Prefer common build output folders; fall back to copying source
             if [ -d dist ]; then
               rsync -a --delete dist/ ../${{ env.PAGES_SUBDIR }}/
             elif [ -d build ]; then
@@ -65,31 +64,36 @@ jobs:
             elif [ -d _site ]; then
               rsync -a --delete _site/ ../${{ env.PAGES_SUBDIR }}/
             else
-              echo "No recognized build output found; copying source files instead"
+              echo "No recognized build output; copying source"
               rsync -a --delete ./ ../${{ env.PAGES_SUBDIR }}/
             fi
           else
-            echo "No package.json — copying repository source"
+            echo "No package.json — copying source"
             rsync -a --delete ./ ../${{ env.PAGES_SUBDIR }}/
           fi
 
-          # Remove any accidentally-copied Git metadata
           rm -rf ../${{ env.PAGES_SUBDIR }}/.git || true
 
-      - name: Commit and push changes if any
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ${{ env.PAGES_SUBDIR }} || true
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
+          cd ..
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
           else
-            git commit -m "Sync Bullinger repository into ${PAGES_SUBDIR}"
-            git push origin HEAD:main
+            echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
-# Notes
-# - This workflow runs manually (workflow_dispatch) or when a repository_dispatch with type `sync-bullinger` is sent.
-# - If Bullinger is ever private, add a personal access token (repo scope) to this repo's secrets as REPO_TOKEN and uncomment the token line above.
-# - To customize build behavior, set the BUILD_COMMAND environment variable to something like "npm run build --if-present" in the workflow file or as a repository secret.
-# - Because triggers are manual or repository_dispatch, the commit pushed by the workflow will not automatically retrigger the workflow (avoids infinite loops).
+      - name: Create pull request if changes detected
+        if: steps.sync_files.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Sync Bullinger repository into ${PAGES_SUBDIR}"
+          branch: sync/bullinger-${{ github.run_id }}
+          title: "Sync Bullinger into pages"
+          body: |
+            Automated sync of timjavins/Bullinger into ${PAGES_SUBDIR}.
+            This PR was created by the site sync workflow.
+          labels: automated-sync
+
+      - name: No changes message
+        if: steps.sync_files.outputs.changed == 'false'
+        run: echo "No changes found; nothing to commit or PR."
