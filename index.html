@@ -1,24 +1,292 @@
-<html>
-<!--Welcome to the club! Thanks for viewing my code.-->
-	<head>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Timothy Javins · Projects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Plus+Jakarta+Sans:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root,html[data-theme="dark"]{
+  --bg:#0b0e15;--panel:#0f1420;--lift:#141b28;--deep:#080b11;--border:#1c2336;
+  --amber:#f59e0b;--amber-dim:#78450b;--green:#22c55e;--blue:#60a5fa;
+  --ink:#cdd5e0;--ink-body:#b0bac8;--muted:#8a94a3;--row-hover:#121829;
+  --scan:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.012) 2px,rgba(255,255,255,.012) 4px);
+  --grid:rgba(245,158,11,.07);
+}
+html[data-theme="light"]{
+  --bg:#f0ece5;--panel:#faf8f4;--lift:#f5f2ec;--deep:#e8e3db;--border:#ddd8cf;
+  --amber:#b45309;--amber-dim:#78350f;--green:#15803d;--blue:#1d4ed8;
+  --ink:#1c1917;--ink-body:#44403c;--muted:#78716c;--row-hover:#f1ede5;
+  --scan:none;--grid:rgba(180,83,9,.08);
+}
+--mono:0;
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink-body);
+  font:15px/1.6 "Plus Jakarta Sans","Segoe UI",system-ui,sans-serif}
+body{background-image:var(--scan)}
+a{color:inherit}
+.mono{font-family:"Share Tech Mono",Consolas,"Courier New",monospace}
+.cond{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.wm-l{display:none!important}
+html[data-theme="light"] .wm-d{display:none!important}html[data-theme="light"] .wm-l{display:block!important}
 
-	</head>
-	<body>
-		<div class="about">
-			<div><img src="https://avatars2.githubusercontent.com/u/7596365" class="profileImg"></div>
-			<h1>Timothy Javins</h1>
-			<h2>A curious, ambitious type.</h2>
+/* banner */
+.banner{position:relative;overflow:hidden;border-bottom:1px solid var(--border);
+  background:
+   linear-gradient(var(--grid) 1px,transparent 1px) 0 0/32px 32px,
+   linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/32px 32px,
+   radial-gradient(900px 260px at 85% 0%,rgba(245,158,11,.14),transparent 70%),
+   var(--deep)}
+.banner::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(90deg,var(--amber),var(--amber-dim))}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:14px 0 0;font-size:12px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.bar .live{color:var(--green)}
+.bar .live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:8px;box-shadow:0 0 8px var(--green)}
+.bar-r{display:flex;gap:10px;align-items:center}
+.me{width:84px;height:84px;object-fit:cover;border-radius:14px;border:2px solid var(--amber)}
+.name{font-family:"Permanent Marker","Segoe Print",cursive;font-size:44px;line-height:1.05;color:var(--ink);transform:rotate(-1.5deg);display:inline-block}
+.who{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.contact{display:flex;gap:8px}
+.cbtn{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);border:1px solid var(--amber-dim);padding:3px 11px;text-decoration:none}
+.cbtn:hover{background:var(--row-hover);border-color:var(--amber)}
+.theme{text-decoration:none;font:inherit;color:var(--muted);background:transparent;border:1px solid var(--border);padding:3px 10px;cursor:pointer;letter-spacing:.14em;text-transform:uppercase}
+.theme:hover{color:var(--amber);border-color:var(--amber-dim)}
+.hero{padding:30px 0 26px}
+.eyebrow{font-size:13px;letter-spacing:.2em;color:var(--amber);text-transform:uppercase}
+h1{margin:6px 0 4px;font-size:64px;line-height:.95;font-weight:700;letter-spacing:.01em;text-transform:uppercase;color:var(--ink)}
+h1 span{color:var(--amber)}
+.tag{font-size:19px;color:var(--ink);margin:10px 0 6px;max-width:62ch}
+.tag b{color:var(--amber);font-weight:600}
+.sub em{color:var(--amber);font-style:normal;font-weight:600}
+.sub{max-width:68ch;color:var(--muted);margin:0 0 22px}
+.marks{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.marks a{background:var(--panel);display:flex;align-items:center;justify-content:center;height:84px;text-decoration:none;position:relative;transition:background .15s}
+.marks a:hover{background:var(--row-hover)}
+.marks a::after{content:attr(data-n);position:absolute;left:8px;top:6px;font-size:10px;color:var(--muted);letter-spacing:.14em}
+.marks img{height:34px;width:auto;max-width:78%;display:block}
+.typo{font-size:34px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);line-height:1}
+.typo i{font-style:normal;color:var(--amber)}
 
-			<hr class='horiBar'>
-			<p class="bio">
-				Throughout my career, I have embraced challenges and opportunities with curiosity and ambition. My journey began as a freelance web developer and an underage college student in the 90s, evolved into a creative pursuit as a musician in the 2000s, and matured through entrepreneurial ventures into the 2010s. Each experience has shaped my professional approach, emphasizing continual learning and resilience.
-				<br><br>
-				Driven by a passion for data and technology, I discovered my affinity for data science after learning about the "unicorn" Data Scientist role—a description that resonated with me. I felt like corporate America finally found a high-value role appropriate for me. I have dedicated hundreds of hours to data engineering and applying my learnings wherever possible. Today, I am focused on delivering impactful solutions as I advance in my career in data.
-				<br><br>
-				This site should have one of those "Please excuse our mess" signs as I subject it to commits in the spirit of building in the open. I gave Copilot a one-liner instruction to build this: <a href="projects/Bullinger/Bullinger.html" target="_blank">EW Bullinger tribute page</a>.
-			</p>
-		</div>
-	</body>
+/* sections */
+.sec{display:flex;align-items:center;gap:14px;margin:54px 0 20px}
+.sec h2{margin:0;font-size:30px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.sec h2::before{content:"// ";color:var(--amber)}
+.sec .rule{flex:1;height:1px;background:var(--border)}
+.sec .count{font-size:12px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+
+/* cards */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--amber);padding:0;display:flex;flex-direction:column;scroll-margin-top:12px}
+.card .head{height:92px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;background:var(--lift);border-bottom:1px solid var(--border)}
+.card .head img{height:42px;width:auto;max-width:70%}
+.badge{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);border:1px solid var(--amber-dim);padding:2px 8px;white-space:nowrap}
+.card .body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+.kick{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.card h3{margin:4px 0 8px;font-size:25px;font-weight:600;line-height:1.15;color:var(--ink);letter-spacing:.02em}
+.card p{margin:0 0 14px;font-size:14.5px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:2px 0 16px}
+.stat{background:var(--deep);padding:10px 12px}
+.stat b{display:block;white-space:nowrap;font-size:22px;line-height:1.05;font-weight:700;color:var(--amber);letter-spacing:.01em}
+.stat b.q{white-space:normal;font-size:17px;line-height:1.15}
+.stat span{display:block;font-size:11.5px;line-height:1.35;color:var(--muted);margin-top:3px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.btn{font:inherit;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  color:#0b0e15;background:var(--amber);border:1px solid var(--amber);padding:6px 14px;cursor:pointer;text-decoration:none;display:inline-block}
+html[data-theme="light"] .btn{color:#faf8f4}
+.btn:hover{filter:brightness(1.12)}
+.btn.ghost,html[data-theme="light"] .btn.ghost{background:transparent;color:var(--amber)}
+.btn.ghost:hover{background:var(--row-hover)}
+
+/* line up kick, headline, text, stats and buttons across the cards in a row */
+@supports (grid-template-rows:subgrid){
+  .cards{row-gap:0}
+  .card{display:grid;grid-template-rows:subgrid;grid-row:span 6;row-gap:0;margin-bottom:18px}
+  .card .head{grid-row:1}
+  .card .body{display:grid;grid-template-rows:subgrid;grid-row:2 / span 5;row-gap:0}
+  .card .stats{align-self:stretch}
+  .card .btns{align-self:end}
+}
+/* how I work */
+.how{display:grid;grid-template-columns:300px 1fr;gap:0;background:var(--panel);border:1px solid var(--border)}
+.steps{display:flex;flex-direction:column;border-right:1px solid var(--border);background:var(--deep)}
+.stp{font:inherit;display:flex;align-items:baseline;gap:14px;text-align:left;width:100%;background:transparent;color:var(--muted);border:0;border-bottom:1px solid var(--border);border-left:3px solid transparent;padding:14px 18px;cursor:pointer}
+.stp:last-child{border-bottom:0}
+.stp small{font-size:12px;letter-spacing:.14em;color:var(--muted);min-width:20px}
+.stp b{font-size:21px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;line-height:1.1}
+.stp:hover{background:var(--row-hover);color:var(--ink)}
+.stp.on{background:var(--lift);color:var(--ink);border-left-color:var(--amber)}
+.stp.on small{color:var(--amber)}
+.detail{padding:28px 34px 30px;display:flex;flex-direction:column;gap:18px;min-height:380px}
+.detail .t{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.detail h3{margin:0;font-size:46px;line-height:1;font-weight:700;letter-spacing:.02em;text-transform:uppercase;color:var(--ink)}
+.detail p{margin:0;font-size:18px;line-height:1.6;color:var(--ink);max-width:56ch}
+.proof{margin-top:auto;background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--amber-dim);padding:14px 18px;font-size:13px;line-height:1.55;color:var(--muted);letter-spacing:.02em}
+.proof b{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;font-weight:400}
+.proof code{font-family:inherit;color:var(--amber);background:var(--lift);border:1px solid var(--border);padding:1px 6px;font-size:12.5px}
+.proof a{display:block;color:var(--blue);margin-top:8px;cursor:pointer}
+.proof a:hover{text-decoration:underline}
+
+footer{margin:60px 0 0;border-top:1px solid var(--border);background:var(--deep);padding:24px 0 30px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer .go{color:var(--amber);letter-spacing:.14em;text-transform:uppercase;font-size:14px}
+footer a{color:var(--blue)}
+footer .small{color:var(--muted);font-size:12px;letter-spacing:.08em}
+
+/* README viewer */
+#ov{position:fixed;inset:0;background:rgba(5,7,11,.82);display:none;z-index:9;padding:3vh 3vw}
+#ov.open{display:flex;flex-direction:column}
+#ov .top{display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--border);border-bottom:0;padding:8px 14px}
+#ov .top span{color:var(--amber);letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+#ov iframe{flex:1;width:100%;border:1px solid var(--border);background:#fff}
+#ovmsg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--ink)}
+
+@media (max-width:820px){
+  h1{font-size:44px}.cards{grid-template-columns:1fr}.marks{grid-template-columns:1fr 1fr}
+  .how{grid-template-columns:1fr}.steps{border-right:0;border-bottom:1px solid var(--border)}.detail{padding:22px 18px 24px;min-height:0}.detail h3{font-size:36px}.stats{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="banner">
+  <div class="wrap">
+    <div class="bar mono"><span class="live">4 tools shipped</span><span class="bar-r"><a class="theme mono" id="howbtn" href="#how">How I work ▾</a><button class="theme mono" id="theme" type="button">Light</button></span></div>
+    <div class="hero">
+      <div class="who"><img class="me" alt="Timothy Javins" src="https://avatars2.githubusercontent.com/u/7596365"><div><div class="name">Timothy Javins</div><div class="eyebrow mono">Chasing the “aha” moment for all of us.</div></div></div>
+      <h1 class="cond">Projects <span>I built</span></h1>
+      <p class="tag"><b>I eat Engineerios for breakfast.</b> Data person with a passion for delivering data-driven insights: authoring with generative AI, automating processes, and building bespoke tools.</p>
+      <p class="sub">My favorite moments are the two that change everything: a bit of insight that reframes the problem, and a trailblazing idea that finally does <em>the</em> thing. These four tools came from chasing both.</p>
+      <nav class="marks">
+        <a href="#bunsen" data-n="01" title="Bunsen"><img class="wm-d" alt="Bunsen" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDEwIDI1NiIgd2lkdGg9IjEwMTAiIGhlaWdodD0iMjU2Ij4NCiAgPHRpdGxlPkJ1bnNlbiB3b3JkbWFyazwvdGl0bGU+DQogIDxkZWZzPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaS1iYWNrIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNFNTgzNUYiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0M5NjAzRiIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJpLWZsYW1lIiB4MT0iMCIgeTE9IjEiIHgyPSIwIiB5Mj0iMCI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNGRkIxM0QiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0ZGRTA3QSIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogIDwvZGVmcz4NCiAgPHJlY3QgaWQ9ImJhY2tpbmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiByeD0iNTgiIGZpbGw9InVybCgjaS1iYWNrKSIvPg0KICA8ZyBpZD0iaWNvbi1jaGFyYWN0ZXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyOCAxMjgpIHNjYWxlKDAuODYpIHRyYW5zbGF0ZSgtMTMwIC0xMzYpIj4NCiAgPGcgaWQ9ImNoYXJhY3RlciI+DQogICAgPGcgaWQ9ImJ1YmJsZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTggMCkiIHN0cm9rZT0iIzJCMUYxQiIgc3Ryb2tlLXdpZHRoPSI2Ljk4IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbGluZWNhcD0icm91bmQiPg0KICAgICAgPHBhdGggZD0iTTcyIDQ0IEgxNTIgQzE4MiA0NCAxOTggNjYgMTk4IDk4IEMxOTggMTMwIDE4MiAxNTIgMTUyIDE1MiBIOTggTDU4IDE4NCBWMTUwIEM0MCAxNDIgMjYgMTI0IDI2IDk4IEMyNiA2NiA0NCA0NCA3MiA0NCBaIiBmaWxsPSIjRjZFN0Q3Ii8+DQogICAgICA8cGF0aCBkPSJNNjAgOTYgUTczIDgwIDg2IDk2IiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjguMTQiLz4NCiAgICAgIDxwYXRoIGQ9Ik0xMjYgOTYgUTEzOSA4MCAxNTIgOTYiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iOC4xNCIvPg0KICAgICAgPHBhdGggZD0iTTkyIDExNCBRMTA2IDEyOCAxMjAgMTE0IiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjguMTQiLz4NCiAgICAgIDxlbGxpcHNlIGN4PSI1NCIgY3k9IjExNiIgcng9IjEyIiByeT0iNyIgZmlsbD0iI0YyOEM2QiIgc3Ryb2tlPSJub25lIiBvcGFjaXR5PSIwLjgiLz4NCiAgICAgIDxlbGxpcHNlIGN4PSIxNTgiIGN5PSIxMTYiIHJ4PSIxMiIgcnk9IjciIGZpbGw9IiNGMjhDNkIiIHN0cm9rZT0ibm9uZSIgb3BhY2l0eT0iMC44Ii8+DQogICAgPC9nPg0KICAgIDxnIGlkPSJidXJuZXIiIHN0cm9rZT0iIzJCMUYxQiIgc3Ryb2tlLXdpZHRoPSI2Ljk4IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSIjRDVEQ0UyIj4NCiAgICAgIDxyZWN0IHg9IjIwOCIgeT0iMTUwIiB3aWR0aD0iMTYiIGhlaWdodD0iNzAiIHJ4PSIzIi8+DQogICAgICA8cmVjdCB4PSIyMDQiIHk9IjE1MCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjkiIHJ4PSIzIi8+DQogICAgICA8cmVjdCB4PSIxOTAuMCIgeT0iMjE1IiB3aWR0aD0iNTIiIGhlaWdodD0iMTMiIHJ4PSI2LjUiLz4NCiAgICA8L2c+DQogICAgPGcgaWQ9ImZsYW1lIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMTYgODYpIHNjYWxlKDAuODUpIHRyYW5zbGF0ZSgtMTI4IC0xNjApIiBzdHJva2U9IiMyQjFGMUIiIHN0cm9rZS13aWR0aD0iOC4yMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+DQogICAgICA8cGF0aCBkPSJNMTMxIDE2MCBDMTQ2IDE4NiAxNjIgMjAwIDE1OCAyMTggQzE1NSAyMzQgMTQzIDI0MCAxMjggMjQwIEMxMTMgMjQwIDEwMSAyMzQgOTggMjE4IEM5NSAyMDAgMTE2IDE4NCAxMzEgMTYwIFoiIGZpbGw9InVybCgjaS1mbGFtZSkiLz4NCiAgICAgIDxwYXRoIGQ9Ik0xMjggMTk2IEMxMzcgMjEwIDE0MiAyMjAgMTQwIDIyOCBDMTM4IDIzNCAxMzMgMjM2IDEyOCAyMzYgQzEyMyAyMzYgMTE4IDIzNCAxMTYgMjI4IEMxMTQgMjIwIDExOSAyMTAgMTI4IDE5NiBaIiBmaWxsPSIjM0Q3QkZGIiBzdHJva2U9Im5vbmUiLz4NCiAgICA8L2c+DQogIDwvZz4NCiAgPC9nPg0KICA8cGF0aCBpZD0id29yZG1hcmsiIGQ9Ik0zMDAgNjAgVjIwMCBIMzUyIEEzNyAzNyAwIDAgMCAzNTIgMTI2IEgzMDAgTTMwMCAxMjYgSDM0NCBBMzMgMzMgMCAwIDAgMzQ0IDYwIEgzMDANCk00MjUgMTA1IFYxNjAgQTQwIDQwIDAgMCAwIDUwNSAxNjAgVjEwNSBNNTA1IDEwNSBWMjAwDQpNNTQ1IDIwMCBWMTA1IE01NDUgMTQ1IEE0MCA0MCAwIDAgMSA2MjUgMTQ1IFYyMDANCk03MjggMTIwIEM3MTYgMTAyIDY2NCAxMDAgNjY0IDEyOCBDNjY0IDE1MiA3MzAgMTUwIDczMCAxNzUgQzczMCAyMDYgNjc0IDIwNiA2NjIgMTg0DQpNNzY4IDE1MiBIODU4IEE0NSA0NSAwIDEgMCA4NDMgMTg2DQpNODkzIDIwMCBWMTA1IE04OTMgMTQ1IEE0MCA0MCAwIDAgMSA5NzMgMTQ1IFYyMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Y2RTdENyIgc3Ryb2tlLXdpZHRoPSIzMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+DQo8L3N2Zz4NCg=="><img class="wm-l" alt="Bunsen" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDEwIDI1NiIgd2lkdGg9IjEwMTAiIGhlaWdodD0iMjU2Ij4NCiAgPHRpdGxlPkJ1bnNlbiB3b3JkbWFyazwvdGl0bGU+DQogIDxkZWZzPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaS1iYWNrIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNFNTgzNUYiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0M5NjAzRiIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJpLWZsYW1lIiB4MT0iMCIgeTE9IjEiIHgyPSIwIiB5Mj0iMCI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNGRkIxM0QiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0ZGRTA3QSIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogIDwvZGVmcz4NCiAgPHJlY3QgaWQ9ImJhY2tpbmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiByeD0iNTgiIGZpbGw9InVybCgjaS1iYWNrKSIvPg0KICA8ZyBpZD0iaWNvbi1jaGFyYWN0ZXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyOCAxMjgpIHNjYWxlKDAuODYpIHRyYW5zbGF0ZSgtMTMwIC0xMzYpIj4NCiAgPGcgaWQ9ImNoYXJhY3RlciI+DQogICAgPGcgaWQ9ImJ1YmJsZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTggMCkiIHN0cm9rZT0iIzJCMUYxQiIgc3Ryb2tlLXdpZHRoPSI2Ljk4IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbGluZWNhcD0icm91bmQiPg0KICAgICAgPHBhdGggZD0iTTcyIDQ0IEgxNTIgQzE4MiA0NCAxOTggNjYgMTk4IDk4IEMxOTggMTMwIDE4MiAxNTIgMTUyIDE1MiBIOTggTDU4IDE4NCBWMTUwIEM0MCAxNDIgMjYgMTI0IDI2IDk4IEMyNiA2NiA0NCA0NCA3MiA0NCBaIiBmaWxsPSIjRjZFN0Q3Ii8+DQogICAgICA8cGF0aCBkPSJNNjAgOTYgUTczIDgwIDg2IDk2IiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjguMTQiLz4NCiAgICAgIDxwYXRoIGQ9Ik0xMjYgOTYgUTEzOSA4MCAxNTIgOTYiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iOC4xNCIvPg0KICAgICAgPHBhdGggZD0iTTkyIDExNCBRMTA2IDEyOCAxMjAgMTE0IiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjguMTQiLz4NCiAgICAgIDxlbGxpcHNlIGN4PSI1NCIgY3k9IjExNiIgcng9IjEyIiByeT0iNyIgZmlsbD0iI0YyOEM2QiIgc3Ryb2tlPSJub25lIiBvcGFjaXR5PSIwLjgiLz4NCiAgICAgIDxlbGxpcHNlIGN4PSIxNTgiIGN5PSIxMTYiIHJ4PSIxMiIgcnk9IjciIGZpbGw9IiNGMjhDNkIiIHN0cm9rZT0ibm9uZSIgb3BhY2l0eT0iMC44Ii8+DQogICAgPC9nPg0KICAgIDxnIGlkPSJidXJuZXIiIHN0cm9rZT0iIzJCMUYxQiIgc3Ryb2tlLXdpZHRoPSI2Ljk4IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSIjRDVEQ0UyIj4NCiAgICAgIDxyZWN0IHg9IjIwOCIgeT0iMTUwIiB3aWR0aD0iMTYiIGhlaWdodD0iNzAiIHJ4PSIzIi8+DQogICAgICA8cmVjdCB4PSIyMDQiIHk9IjE1MCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjkiIHJ4PSIzIi8+DQogICAgICA8cmVjdCB4PSIxOTAuMCIgeT0iMjE1IiB3aWR0aD0iNTIiIGhlaWdodD0iMTMiIHJ4PSI2LjUiLz4NCiAgICA8L2c+DQogICAgPGcgaWQ9ImZsYW1lIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMTYgODYpIHNjYWxlKDAuODUpIHRyYW5zbGF0ZSgtMTI4IC0xNjApIiBzdHJva2U9IiMyQjFGMUIiIHN0cm9rZS13aWR0aD0iOC4yMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+DQogICAgICA8cGF0aCBkPSJNMTMxIDE2MCBDMTQ2IDE4NiAxNjIgMjAwIDE1OCAyMTggQzE1NSAyMzQgMTQzIDI0MCAxMjggMjQwIEMxMTMgMjQwIDEwMSAyMzQgOTggMjE4IEM5NSAyMDAgMTE2IDE4NCAxMzEgMTYwIFoiIGZpbGw9InVybCgjaS1mbGFtZSkiLz4NCiAgICAgIDxwYXRoIGQ9Ik0xMjggMTk2IEMxMzcgMjEwIDE0MiAyMjAgMTQwIDIyOCBDMTM4IDIzNCAxMzMgMjM2IDEyOCAyMzYgQzEyMyAyMzYgMTE4IDIzNCAxMTYgMjI4IEMxMTQgMjIwIDExOSAyMTAgMTI4IDE5NiBaIiBmaWxsPSIjM0Q3QkZGIiBzdHJva2U9Im5vbmUiLz4NCiAgICA8L2c+DQogIDwvZz4NCiAgPC9nPg0KICA8cGF0aCBpZD0id29yZG1hcmsiIGQ9Ik0zMDAgNjAgVjIwMCBIMzUyIEEzNyAzNyAwIDAgMCAzNTIgMTI2IEgzMDAgTTMwMCAxMjYgSDM0NCBBMzMgMzMgMCAwIDAgMzQ0IDYwIEgzMDANCk00MjUgMTA1IFYxNjAgQTQwIDQwIDAgMCAwIDUwNSAxNjAgVjEwNSBNNTA1IDEwNSBWMjAwDQpNNTQ1IDIwMCBWMTA1IE01NDUgMTQ1IEE0MCA0MCAwIDAgMSA2MjUgMTQ1IFYyMDANCk03MjggMTIwIEM3MTYgMTAyIDY2NCAxMDAgNjY0IDEyOCBDNjY0IDE1MiA3MzAgMTUwIDczMCAxNzUgQzczMCAyMDYgNjc0IDIwNiA2NjIgMTg0DQpNNzY4IDE1MiBIODU4IEE0NSA0NSAwIDEgMCA4NDMgMTg2DQpNODkzIDIwMCBWMTA1IE04OTMgMTQ1IEE0MCA0MCAwIDAgMSA5NzMgMTQ1IFYyMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJCMUYxQiIgc3Ryb2tlLXdpZHRoPSIzMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+DQo8L3N2Zz4NCg=="></a>
+        <a href="#butler" data-n="02" title="Butler"><span class="typo cond">Butler</span></a>
+        <a href="#excel" data-n="03" title="Excel MCP"><span class="typo cond">Excel <i>MCP</i></span></a>
+        <a href="#m365" data-n="04" title="M365 MCP"><span class="typo cond">M365 <i>MCP</i></span></a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="sec"><h2 class="cond">Tools</h2><span class="rule"></span><span class="count mono">4 projects</span></div>
+  <div class="cards">
+
+    <article class="card" id="bunsen">
+      <div class="head"><img class="wm-d" alt="Bunsen" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDEwIDI1NiIgd2lkdGg9IjEwMTAiIGhlaWdodD0iMjU2Ij4NCiAgPHRpdGxlPkJ1bnNlbiB3b3JkbWFyazwvdGl0bGU+DQogIDxkZWZzPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaS1iYWNrIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNFNTgzNUYiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0M5NjAzRiIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJpLWZsYW1lIiB4MT0iMCIgeTE9IjEiIHgyPSIwIiB5Mj0iMCI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNGRkIxM0QiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0ZGRTA3QSIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogIDwvZGVmcz4NCiAgPHJlY3QgaWQ9ImJhY2tpbmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiByeD0iNTgiIGZpbGw9InVybCgjaS1iYWNrKSIvPg0KICA8ZyBpZD0iaWNvbi1jaGFyYWN0ZXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyOCAxMjgpIHNjYWxlKDAuODYpIHRyYW5zbGF0ZSgtMTMwIC0xMzYpIj4NCiAgPGcgaWQ9ImNoYXJhY3RlciI+DQogICAgPGcgaWQ9ImJ1YmJsZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTggMCkiIHN0cm9rZT0iIzJCMUYxQiIgc3Ryb2tlLXdpZHRoPSI2Ljk4IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbGluZWNhcD0icm91bmQiPg0KICAgICAgPHBhdGggZD0iTTcyIDQ0IEgxNTIgQzE4MiA0NCAxOTggNjYgMTk4IDk4IEMxOTggMTMwIDE4MiAxNTIgMTUyIDE1MiBIOTggTDU4IDE4NCBWMTUwIEM0MCAxNDIgMjYgMTI0IDI2IDk4IEMyNiA2NiA0NCA0NCA3MiA0NCBaIiBmaWxsPSIjRjZFN0Q3Ii8+DQogICAgICA8cGF0aCBkPSJNNjAgOTYgUTczIDgwIDg2IDk2IiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjguMTQiLz4NCiAgICAgIDxwYXRoIGQ9Ik0xMjYgOTYgUTEzOSA4MCAxNTIgOTYiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iOC4xNCIvPg0KICAgICAgPHBhdGggZD0iTTkyIDExNCBRMTA2IDEyOCAxMjAgMTE0IiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjguMTQiLz4NCiAgICAgIDxlbGxpcHNlIGN4PSI1NCIgY3k9IjExNiIgcng9IjEyIiByeT0iNyIgZmlsbD0iI0YyOEM2QiIgc3Ryb2tlPSJub25lIiBvcGFjaXR5PSIwLjgiLz4NCiAgICAgIDxlbGxpcHNlIGN4PSIxNTgiIGN5PSIxMTYiIHJ4PSIxMiIgcnk9IjciIGZpbGw9IiNGMjhDNkIiIHN0cm9rZT0ibm9uZSIgb3BhY2l0eT0iMC44Ii8+DQogICAgPC9nPg0KICAgIDxnIGlkPSJidXJuZXIiIHN0cm9rZT0iIzJCMUYxQiIgc3Ryb2tlLXdpZHRoPSI2Ljk4IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSIjRDVEQ0UyIj4NCiAgICAgIDxyZWN0IHg9IjIwOCIgeT0iMTUwIiB3aWR0aD0iMTYiIGhlaWdodD0iNzAiIHJ4PSIzIi8+DQogICAgICA8cmVjdCB4PSIyMDQiIHk9IjE1MCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjkiIHJ4PSIzIi8+DQogICAgICA8cmVjdCB4PSIxOTAuMCIgeT0iMjE1IiB3aWR0aD0iNTIiIGhlaWdodD0iMTMiIHJ4PSI2LjUiLz4NCiAgICA8L2c+DQogICAgPGcgaWQ9ImZsYW1lIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMTYgODYpIHNjYWxlKDAuODUpIHRyYW5zbGF0ZSgtMTI4IC0xNjApIiBzdHJva2U9IiMyQjFGMUIiIHN0cm9rZS13aWR0aD0iOC4yMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+DQogICAgICA8cGF0aCBkPSJNMTMxIDE2MCBDMTQ2IDE4NiAxNjIgMjAwIDE1OCAyMTggQzE1NSAyMzQgMTQzIDI0MCAxMjggMjQwIEMxMTMgMjQwIDEwMSAyMzQgOTggMjE4IEM5NSAyMDAgMTE2IDE4NCAxMzEgMTYwIFoiIGZpbGw9InVybCgjaS1mbGFtZSkiLz4NCiAgICAgIDxwYXRoIGQ9Ik0xMjggMTk2IEMxMzcgMjEwIDE0MiAyMjAgMTQwIDIyOCBDMTM4IDIzNCAxMzMgMjM2IDEyOCAyMzYgQzEyMyAyMzYgMTE4IDIzNCAxMTYgMjI4IEMxMTQgMjIwIDExOSAyMTAgMTI4IDE5NiBaIiBmaWxsPSIjM0Q3QkZGIiBzdHJva2U9Im5vbmUiLz4NCiAgICA8L2c+DQogIDwvZz4NCiAgPC9nPg0KICA8cGF0aCBpZD0id29yZG1hcmsiIGQ9Ik0zMDAgNjAgVjIwMCBIMzUyIEEzNyAzNyAwIDAgMCAzNTIgMTI2IEgzMDAgTTMwMCAxMjYgSDM0NCBBMzMgMzMgMCAwIDAgMzQ0IDYwIEgzMDANCk00MjUgMTA1IFYxNjAgQTQwIDQwIDAgMCAwIDUwNSAxNjAgVjEwNSBNNTA1IDEwNSBWMjAwDQpNNTQ1IDIwMCBWMTA1IE01NDUgMTQ1IEE0MCA0MCAwIDAgMSA2MjUgMTQ1IFYyMDANCk03MjggMTIwIEM3MTYgMTAyIDY2NCAxMDAgNjY0IDEyOCBDNjY0IDE1MiA3MzAgMTUwIDczMCAxNzUgQzczMCAyMDYgNjc0IDIwNiA2NjIgMTg0DQpNNzY4IDE1MiBIODU4IEE0NSA0NSAwIDEgMCA4NDMgMTg2DQpNODkzIDIwMCBWMTA1IE04OTMgMTQ1IEE0MCA0MCAwIDAgMSA5NzMgMTQ1IFYyMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Y2RTdENyIgc3Ryb2tlLXdpZHRoPSIzMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+DQo8L3N2Zz4NCg=="><img class="wm-l" alt="Bunsen" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDEwIDI1NiIgd2lkdGg9IjEwMTAiIGhlaWdodD0iMjU2Ij4NCiAgPHRpdGxlPkJ1bnNlbiB3b3JkbWFyazwvdGl0bGU+DQogIDxkZWZzPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaS1iYWNrIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNFNTgzNUYiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0M5NjAzRiIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJpLWZsYW1lIiB4MT0iMCIgeTE9IjEiIHgyPSIwIiB5Mj0iMCI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNGRkIxM0QiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0ZGRTA3QSIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogIDwvZGVmcz4NCiAgPHJlY3QgaWQ9ImJhY2tpbmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiByeD0iNTgiIGZpbGw9InVybCgjaS1iYWNrKSIvPg0KICA8ZyBpZD0iaWNvbi1jaGFyYWN0ZXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyOCAxMjgpIHNjYWxlKDAuODYpIHRyYW5zbGF0ZSgtMTMwIC0xMzYpIj4NCiAgPGcgaWQ9ImNoYXJhY3RlciI+DQogICAgPGcgaWQ9ImJ1YmJsZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTggMCkiIHN0cm9rZT0iIzJCMUYxQiIgc3Ryb2tlLXdpZHRoPSI2Ljk4IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbGluZWNhcD0icm91bmQiPg0KICAgICAgPHBhdGggZD0iTTcyIDQ0IEgxNTIgQzE4MiA0NCAxOTggNjYgMTk4IDk4IEMxOTggMTMwIDE4MiAxNTIgMTUyIDE1MiBIOTggTDU4IDE4NCBWMTUwIEM0MCAxNDIgMjYgMTI0IDI2IDk4IEMyNiA2NiA0NCA0NCA3MiA0NCBaIiBmaWxsPSIjRjZFN0Q3Ii8+DQogICAgICA8cGF0aCBkPSJNNjAgOTYgUTczIDgwIDg2IDk2IiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjguMTQiLz4NCiAgICAgIDxwYXRoIGQ9Ik0xMjYgOTYgUTEzOSA4MCAxNTIgOTYiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iOC4xNCIvPg0KICAgICAgPHBhdGggZD0iTTkyIDExNCBRMTA2IDEyOCAxMjAgMTE0IiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjguMTQiLz4NCiAgICAgIDxlbGxpcHNlIGN4PSI1NCIgY3k9IjExNiIgcng9IjEyIiByeT0iNyIgZmlsbD0iI0YyOEM2QiIgc3Ryb2tlPSJub25lIiBvcGFjaXR5PSIwLjgiLz4NCiAgICAgIDxlbGxpcHNlIGN4PSIxNTgiIGN5PSIxMTYiIHJ4PSIxMiIgcnk9IjciIGZpbGw9IiNGMjhDNkIiIHN0cm9rZT0ibm9uZSIgb3BhY2l0eT0iMC44Ii8+DQogICAgPC9nPg0KICAgIDxnIGlkPSJidXJuZXIiIHN0cm9rZT0iIzJCMUYxQiIgc3Ryb2tlLXdpZHRoPSI2Ljk4IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSIjRDVEQ0UyIj4NCiAgICAgIDxyZWN0IHg9IjIwOCIgeT0iMTUwIiB3aWR0aD0iMTYiIGhlaWdodD0iNzAiIHJ4PSIzIi8+DQogICAgICA8cmVjdCB4PSIyMDQiIHk9IjE1MCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjkiIHJ4PSIzIi8+DQogICAgICA8cmVjdCB4PSIxOTAuMCIgeT0iMjE1IiB3aWR0aD0iNTIiIGhlaWdodD0iMTMiIHJ4PSI2LjUiLz4NCiAgICA8L2c+DQogICAgPGcgaWQ9ImZsYW1lIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMTYgODYpIHNjYWxlKDAuODUpIHRyYW5zbGF0ZSgtMTI4IC0xNjApIiBzdHJva2U9IiMyQjFGMUIiIHN0cm9rZS13aWR0aD0iOC4yMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+DQogICAgICA8cGF0aCBkPSJNMTMxIDE2MCBDMTQ2IDE4NiAxNjIgMjAwIDE1OCAyMTggQzE1NSAyMzQgMTQzIDI0MCAxMjggMjQwIEMxMTMgMjQwIDEwMSAyMzQgOTggMjE4IEM5NSAyMDAgMTE2IDE4NCAxMzEgMTYwIFoiIGZpbGw9InVybCgjaS1mbGFtZSkiLz4NCiAgICAgIDxwYXRoIGQ9Ik0xMjggMTk2IEMxMzcgMjEwIDE0MiAyMjAgMTQwIDIyOCBDMTM4IDIzNCAxMzMgMjM2IDEyOCAyMzYgQzEyMyAyMzYgMTE4IDIzNCAxMTYgMjI4IEMxMTQgMjIwIDExOSAyMTAgMTI4IDE5NiBaIiBmaWxsPSIjM0Q3QkZGIiBzdHJva2U9Im5vbmUiLz4NCiAgICA8L2c+DQogIDwvZz4NCiAgPC9nPg0KICA8cGF0aCBpZD0id29yZG1hcmsiIGQ9Ik0zMDAgNjAgVjIwMCBIMzUyIEEzNyAzNyAwIDAgMCAzNTIgMTI2IEgzMDAgTTMwMCAxMjYgSDM0NCBBMzMgMzMgMCAwIDAgMzQ0IDYwIEgzMDANCk00MjUgMTA1IFYxNjAgQTQwIDQwIDAgMCAwIDUwNSAxNjAgVjEwNSBNNTA1IDEwNSBWMjAwDQpNNTQ1IDIwMCBWMTA1IE01NDUgMTQ1IEE0MCA0MCAwIDAgMSA2MjUgMTQ1IFYyMDANCk03MjggMTIwIEM3MTYgMTAyIDY2NCAxMDAgNjY0IDEyOCBDNjY0IDE1MiA3MzAgMTUwIDczMCAxNzUgQzczMCAyMDYgNjc0IDIwNiA2NjIgMTg0DQpNNzY4IDE1MiBIODU4IEE0NSA0NSAwIDEgMCA4NDMgMTg2DQpNODkzIDIwMCBWMTA1IE04OTMgMTQ1IEE0MCA0MCAwIDAgMSA5NzMgMTQ1IFYyMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJCMUYxQiIgc3Ryb2tlLXdpZHRoPSIzMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+DQo8L3N2Zz4NCg=="><span class="badge mono">Claude Code mod</span></div>
+      <div class="body">
+        <span class="kick mono">Stoke your cache while working elsewhere</span>
+        <h3 class="cond">Keeps the prompt cache warm so a meeting does not cost you the conversation.</h3>
+        <p>Claude Code re-sends the whole conversation every request and relies on the cache, which expires after 5 idle minutes. Bunsen sends one small background request, a stoke, just before it expires. Nothing lands in your transcript.</p>
+        <div class="stats">
+          <div class="stat"><b class="cond">$203</b><span>saved in my first 3 weeks, as sessions returned to a warm cache</span></div>
+          <div class="stat"><b class="cond">2.9×</b><span>saved for every $1 spent on 1,612 stokes</span></div>
+          <div class="stat"><b class="cond q">All the savings, none of the bloat.</b><span>nothing added to the transcript or the context</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" id="butler">
+      <div class="head"><span class="typo cond">Butler</span><span class="badge mono">Claude Code plugin</span></div>
+      <div class="body">
+        <span class="kick mono">Everything in its place. Mind the essentials. Enhancements at your service.</span>
+        <h3 class="cond">Prices every plugin you run and disables the ones you never use.</h3>
+        <p>Every enabled plugin injects its descriptions into every request, and nothing in Claude Code shows the cost. Butler measures it, protects anything that leaves no usage trace, enforces governed-over-experimental precedence, and keeps marketplaces current.</p>
+        <div class="stats">
+          <div class="stat"><b class="cond">86% less</b><span>always-on plugin context per request: ~32.7K tokens down to ~4.5K</span></div>
+          <div class="stat"><b class="cond">0</b><span>plugins ever deleted. It only disables, so every cut is reversible</span></div>
+          <div class="stat"><b class="cond">~0.4 s</b><span>session-start status line keeps the cost in view</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" id="excel">
+      <div class="head"><span class="typo cond">Excel <i>MCP</i></span><span class="badge mono">MCP server</span></div>
+      <div class="body">
+        <span class="kick mono">The Excel you have open, plus the full power of Claude Code</span>
+        <h3 class="cond">Claude Code works inside your live workbook, with the rest of your toolbelt in the same conversation.</h3>
+        <p>It attaches to the running Excel, so it sees unsaved edits, hidden sheets, VBA, macros and Power Query. Large writes preview first, every write is journalled for undo, and a SharePoint file refuses writes until you acknowledge colleagues may be editing it.</p>
+        <div class="stats">
+          <div class="stat"><b class="cond">215K</b><span>values copied between workbooks in one call, none in the model's context</span></div>
+          <div class="stat"><b class="cond">15%</b><span>smaller fixed tool surface than when first measured</span></div>
+          <div class="stat"><b class="cond">24%</b><span>smaller typical tool responses than when first measured</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" id="m365">
+      <div class="head"><span class="typo cond">M365 <i>MCP</i></span><span class="badge mono">MCP server</span></div>
+      <div class="body">
+        <span class="kick mono">A thin server over the CLI for Microsoft 365</span>
+        <h3 class="cond">Four generic tools reach roughly 900 Microsoft 365 commands.</h3>
+        <p>Rather than hand-wrapping every command, it exposes status, login, help and run, and shells out to the <code>m365</code> CLI you already have. Single sign-on is reused, so a warm session needs no new login.</p>
+        <div class="stats">
+          <div class="stat"><b class="cond">4</b><span>tools: status, login, help, run</span></div>
+          <div class="stat"><b class="cond">~900</b><span>CLI commands reachable</span></div>
+          <div class="stat"><b class="cond q">Thin by design</b><span>the existing CLI does the heavy lifting</span></div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="sec" id="how"><h2 class="cond">How I work</h2><span class="rule"></span><span class="count mono">7 steps · click one</span></div>
+  <div class="how">
+    <div class="steps" id="steps"></div>
+    <div class="detail">
+      <div class="t mono" id="lc"></div>
+      <h3 class="cond" id="lt"></h3>
+      <p id="lp"></p>
+      <div class="proof mono" id="lx"></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><span class="go mono">Elsewhere</span><br><a href="https://www.linkedin.com/in/timothyjavins" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/timjavins" target="_blank" rel="noopener">GitHub</a> · <a href="projects/Bullinger/Bullinger.html">EW Bullinger tribute page</a></div>
+    <div class="small mono">Updated 11/4/26</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var PID='2173315219';
+  var root=document.documentElement,tb=document.getElementById('theme');
+  function setTheme(t){root.setAttribute('data-theme',t);tb.textContent=t==='dark'?'Light':'Dark';try{localStorage.setItem('tjTheme',t)}catch(e){}}
+  var saved=null;try{saved=localStorage.getItem('tjTheme')}catch(e){}
+  setTheme(saved||((window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'));
+  tb.onclick=function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark')};
+
+  var S=[
+    {n:'Notice the pain',t:'I start from a bill, a delay or a recurring annoyance, not from a technology.',p:'One cold prompt in a 275K-token conversation cost $0.69. The same prompt warm cost $0.03.',l:['Bunsen','bunsen']},
+    {n:'Measure first',t:'Before I fix anything, I count it. If I cannot measure it, I do not claim it.',p:'Butler priced each plugin in always-on tokens per request before cutting anything. The ten costliest had zero recorded uses across 287 sessions.',l:['Butler','butler']},
+    {n:'Build the smallest thing',t:'Prefer the narrow tool that reuses what already works over a large wrapper.',p:'M365 MCP reuses the existing m365 CLI, so four generic tools reach about 900 Microsoft 365 commands.',l:['M365 MCP','m365']},
+    {n:'Test',t:'Write the spec first, then the test, then the code. Spec-driven development and TDD are both how I work: red, green, refactor.',p:'Bunsen’s design doc numbers every live verification, V1 through V32.',l:['Bunsen','bunsen']},
+    {n:'Safe by default',t:'When something can cause lost work, it previews first, records what it changed, and asks before touching shared files.',p:'Excel MCP previews large writes and journals every write for one-call undo. Shared SharePoint workbooks refuse writes until the caller acknowledges colleagues may be editing.',l:['Excel MCP','excel']},
+    {n:'Say the caveat',t:'The limit goes next to the claim. A tool with no trade-offs is either trivial or untested.',p:'Every README carries a \"Caveat:\" line right next to its biggest claim.',l:['Excel MCP','excel']},
+    {n:'Keep the receipts',t:'Every number traces to a file or a run, and the books can show a loss.',p:'<code>/bunsen totals</code> counts every stoke as a cost when sent, and as a saving only when a warm cache meets a returning prompt.',l:['Bunsen','bunsen']}
+  ];
+  var st=document.getElementById('steps'),lt=document.getElementById('lt'),lp=document.getElementById('lp'),lx=document.getElementById('lx'),lc=document.getElementById('lc'),bs=[];
+  S.forEach(function(s,i){
+    var b=document.createElement('button');b.type='button';b.className='stp cond';
+    b.innerHTML='<small class="mono">0'+(i+1)+'</small><b>'+s.n+'</b>';
+    b.onclick=function(){go(i)};st.appendChild(b);bs.push(b);
+  });
+  function go(i){
+    bs.forEach(function(b,j){b.className='stp cond'+(j===i?' on':'')});
+    var s=S[i];lt.textContent=s.n;lp.textContent=s.t;
+    lc.textContent='Step 0'+(i+1)+' of 0'+S.length;
+    lx.innerHTML='<b>Proof</b>'+s.p+'<a data-jump="'+s.l[1]+'">Jump to '+s.l[0]+' ▸</a>';
+  }
+  lx.addEventListener('click',function(e){var a=e.target.closest('[data-jump]');if(!a)return;var el=document.getElementById(a.getAttribute('data-jump'));if(el)el.scrollIntoView({behavior:'smooth',block:'start'})});
+  document.getElementById('howbtn').addEventListener('click',function(e){e.preventDefault();document.getElementById('how').scrollIntoView({behavior:'smooth',block:'start'})});
+  go(0);
+
+})();
+</script>
+</body>
 </html>
